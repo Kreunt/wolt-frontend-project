@@ -1,8 +1,54 @@
 import React from "react";
 import styled from "styled-components";
 
-const InputArea = () => {
-  return;
+interface InputAreaProps {
+  defText: string;
+  symbol: string;
+  setStateValue: React.Dispatch<React.SetStateAction<any>>;
+}
+const ColumnContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 40px;
+`;
+const RowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 320px;
+  height: 40px;
+`;
+const Input = styled.input`
+  box-sizing: border-box;
+  height: 40px;
+  width: 265px;
+  left: 0px;
+  top: 20px;
+
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid #ffffff;
+  box-shadow: inset 0px 0px 10px 4px rgba(218, 218, 218, 0.4);
+  border-radius: 7px;
+`;
+const StyledText = styled.p`
+  font-family: "Baskervville";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 0px;
+`;
+const InputArea = (props: InputAreaProps) => {
+  return (
+    <ColumnContainer>
+      <StyledText>{props.defText}</StyledText>
+      <RowContainer>
+        <Input onChange={(e) => props.setStateValue(e.target.value)} />
+        <StyledText>{props.symbol}</StyledText>
+      </RowContainer>
+    </ColumnContainer>
+  );
 };
 
 export default InputArea;
