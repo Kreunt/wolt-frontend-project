@@ -14,7 +14,7 @@ const Container = styled.div`
   background: linear-gradient(180deg, #fff2ea 0%, #fff4ea 100%);
   border-radius: 20px;
   margin: 20px;
-  gap: 32px;
+  gap: 20px;
 `;
 const Header = styled.h1`
   position: relative;
