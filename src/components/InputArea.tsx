@@ -4,6 +4,8 @@ import styled from "styled-components";
 interface InputAreaProps {
   defText: string;
   symbol: string;
+  type?: string;
+  value?: string;
   setStateValue: React.Dispatch<React.SetStateAction<any>>;
 }
 const ColumnContainer = styled.div`
@@ -44,7 +46,11 @@ const InputArea = (props: InputAreaProps) => {
     <ColumnContainer>
       <StyledText>{props.defText}</StyledText>
       <RowContainer>
-        <Input onChange={(e) => props.setStateValue(e.target.value)} />
+        <Input
+          onChange={(e) => props.setStateValue(e.target.value)}
+          type={props.type}
+          value={props.value}
+        />
         <StyledText>{props.symbol}</StyledText>
       </RowContainer>
     </ColumnContainer>

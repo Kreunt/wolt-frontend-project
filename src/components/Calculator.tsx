@@ -34,27 +34,54 @@ const Header = styled.h1`
 
   color: #000000;
 `;
+const ButtonBar = styled.div`
+  position: relative;
+  width: 414px;
+  height: 50px;
+  top: 40px;
+
+  background: rgba(255, 255, 255, 0.4);
+`;
 
 const Calculator = () => {
   const [cartValue, setCartValue] = React.useState<number>(0);
   const [deliveryDistance, setDeliveryDistance] = React.useState<number>(0);
   const [amountOfItems, setAmountOfItems] = React.useState<number>(0);
-  const [time, setTime] = React.useState<number>(0);
+  const [time, setTime] = React.useState<Date>(new Date());
   return (
     <Container>
       <Header>Delivery Fee Calculator</Header>
-      <InputArea defText="Cart Value" symbol="€" setStateValue={setCartValue} />
+      <InputArea
+        defText="Cart Value"
+        symbol="€"
+        setStateValue={setCartValue}
+        type="number"
+      />
       <InputArea
         defText="Delivery Distance"
         symbol="m"
         setStateValue={setDeliveryDistance}
+        type="number"
       />
       <InputArea
         defText="Amount of Items"
         symbol=""
         setStateValue={setAmountOfItems}
+        type="number"
       />
-      <InputArea defText="Time" symbol="" setStateValue={setTime} />
+      <InputArea
+        defText="Time"
+        symbol=""
+        setStateValue={setTime}
+        type="datetime-local"
+      />
+      <ButtonBar></ButtonBar>
+      <InputArea
+        defText="Delivery price"
+        symbol=""
+        setStateValue={setTime}
+        value="1.0"
+      />
     </Container>
   );
 };
