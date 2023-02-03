@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import InputArea from "./InputArea";
+import calculateButton from "../assets/calculateButton.png";
 
 const Container = styled.div`
   display: flex;
@@ -36,11 +37,16 @@ const Header = styled.h1`
 `;
 const ButtonBar = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
   width: 414px;
   height: 50px;
   top: 40px;
 
   background: rgba(255, 255, 255, 0.4);
+`;
+const CalculateImage = styled.img`
+  cursor: pointer;
 `;
 
 const Calculator = () => {
@@ -51,6 +57,9 @@ const Calculator = () => {
   const [deliveryPrice, setDeliveryPrice] = React.useState<number>(0);
 
   const calculateDeliveryFee = () => {
+    if (cartValue === 0 || deliveryDistance === 0 || amountOfItems === 0) {
+      return -1;
+    }
     let deliveryFee = 0;
     if (cartValue > 100) {
       return deliveryFee;
@@ -110,9 +119,11 @@ const Calculator = () => {
       />
       <InputArea defText="Time" setStateValue={setTime} type="datetime-local" />
       <ButtonBar>
-        <button type="button" onClick={handleCalculate}>
-          Calculate
-        </button>
+        <CalculateImage
+          src={calculateButton}
+          onClick={handleCalculate}
+          alt="Calculate Button"
+        />
       </ButtonBar>
       <InputArea
         defText="Delivery price"
