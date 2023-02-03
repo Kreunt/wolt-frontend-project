@@ -48,6 +48,46 @@ const Calculator = () => {
   const [deliveryDistance, setDeliveryDistance] = React.useState<number>(0);
   const [amountOfItems, setAmountOfItems] = React.useState<number>(0);
   const [time, setTime] = React.useState<Date>(new Date());
+  const [deliveryPrice, setDeliveryPrice] = React.useState<number>(0);
+
+  const calculateDeliveryFee = () => {
+    let deliveryFee = 0;
+    if (cartValue > 100) {
+      return deliveryFee;
+    }
+
+    if (cartValue < 10) {
+      let cartSurcharge = 10 - cartValue;
+      deliveryFee += cartSurcharge;
+    }
+
+    deliveryFee += 2; // base delivery fee
+    if (deliveryDistance > 1000) {
+      deliveryFee += Math.ceil((deliveryDistance - 1000) / 500);
+    }
+
+    if (amountOfItems > 4) {
+      deliveryFee += (amountOfItems - 4) * 0.5;
+    }
+    if (amountOfItems > 12) {
+      deliveryFee += 1.2; // bulk surcharge
+    }
+
+    if (time.getHours() <= 19 && time.getHours() >= 15 && time.getDay() === 5) {
+      deliveryFee *= 1.2; // friday rush surcharge
+    }
+
+    if (deliveryFee > 15) {
+      deliveryFee = 15;
+    }
+
+    return deliveryFee;
+  };
+
+  const handleCalculate = () => {
+    setDeliveryPrice(calculateDeliveryFee());
+  };
+
   return (
     <Container>
       <Header>Delivery Fee Calculator</Header>
@@ -65,22 +105,19 @@ const Calculator = () => {
       />
       <InputArea
         defText="Amount of Items"
-        symbol=""
         setStateValue={setAmountOfItems}
         type="number"
       />
-      <InputArea
-        defText="Time"
-        symbol=""
-        setStateValue={setTime}
-        type="datetime-local"
-      />
-      <ButtonBar></ButtonBar>
+      <InputArea defText="Time" setStateValue={setTime} type="datetime-local" />
+      <ButtonBar>
+        <button type="button" onClick={handleCalculate}>
+          Calculate
+        </button>
+      </ButtonBar>
       <InputArea
         defText="Delivery price"
-        symbol=""
-        setStateValue={setTime}
-        value="1.0"
+        setStateValue={setDeliveryPrice}
+        value={deliveryPrice.toString()}
       />
     </Container>
   );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface InputAreaProps {
   defText: string;
-  symbol: string;
+  symbol?: string;
   type?: string;
   value?: string;
   setStateValue: React.Dispatch<React.SetStateAction<any>>;
@@ -47,7 +47,15 @@ const InputArea = (props: InputAreaProps) => {
       <StyledText>{props.defText}</StyledText>
       <RowContainer>
         <Input
-          onChange={(e) => props.setStateValue(e.target.value)}
+          onChange={(e) => {
+            if (props.defText !== "Delivery price") {
+              if (props.type === "datetime-local") {
+                props.setStateValue(new Date(e.target.value));
+              } else {
+                props.setStateValue(e.target.value);
+              }
+            }
+          }}
           type={props.type}
           value={props.value}
         />
