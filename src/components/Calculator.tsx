@@ -75,9 +75,6 @@ const Calculator = () => {
   const [deliveryPrice, setDeliveryPrice] = React.useState<number>(0);
 
   const calculateDeliveryFee = () => {
-    if (cartValue === 0 || deliveryDistance === 0 || amountOfItems === 0) {
-      return -1;
-    }
     let deliveryFee = 0;
     if (cartValue > 100) {
       return deliveryFee;
