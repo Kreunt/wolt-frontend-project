@@ -42,11 +42,29 @@ const ButtonBar = styled.div`
   width: 414px;
   height: 50px;
   top: 40px;
+  padding: 5px;
 
   background: rgba(255, 255, 255, 0.4);
 `;
 const CalculateImage = styled.img`
+  --g: 0px; /* the gap */
+  --b: 2px; /* border thickness*/
+  --c: #ff9a62; /* the color */
+
+  padding: calc(var(--g) + var(--b));
+  --_c: #0000 0 25%, var(--c) 0 50%;
+  --_g1: repeating-linear-gradient(90deg, var(--_c)) repeat-x;
+  --_g2: repeating-linear-gradient(180deg, var(--_c)) repeat-y;
+  background: var(--_g1) var(--_p, 25%) 0, var(--_g2) 0 var(--_p, 125%),
+    var(--_g1) var(--_p, 125%) 100%, var(--_g2) 100% var(--_p, 25%);
+  background-size: 200% var(--b), var(--b) 200%;
   cursor: pointer;
+  filter: grayscale(50%);
+  transition: 0.3s;
+  &:hover {
+    --_p: 75%;
+    filter: grayscale(0%);
+  }
 `;
 
 const Calculator = () => {
