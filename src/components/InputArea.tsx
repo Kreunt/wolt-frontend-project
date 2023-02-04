@@ -46,19 +46,21 @@ const InputArea = (props: InputAreaProps) => {
     <ColumnContainer>
       <StyledText>{props.defText}</StyledText>
       <RowContainer>
-        <Input
-          onChange={(e) => {
-            if (props.defText !== "Delivery price") {
+        {props.defText === "Delivery price" ? (
+          <StyledText>{props.value}</StyledText>
+        ) : (
+          <Input
+            onChange={(e) => {
               if (props.type === "datetime-local") {
                 props.setStateValue(new Date(e.target.value));
               } else {
                 props.setStateValue(e.target.value);
               }
-            }
-          }}
-          type={props.type}
-          value={props.value}
-        />
+            }}
+            type={props.type}
+            value={props.value}
+          />
+        )}
         <StyledText>{props.symbol}</StyledText>
       </RowContainer>
     </ColumnContainer>

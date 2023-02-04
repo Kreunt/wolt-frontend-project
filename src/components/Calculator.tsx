@@ -127,6 +127,7 @@ const Calculator = () => {
       </ButtonBar>
       <InputArea
         defText="Delivery price"
+        symbol="€"
         setStateValue={setDeliveryPrice}
         value={deliveryPrice.toString()}
       />
